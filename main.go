@@ -47,24 +47,56 @@ func main(){
   }
 
   // CREATE
-  createPerson1, err := personsRepository.Create(mockperson1)
+  createdPerson1, err := personsRepository.Create(mockperson1)
   if err != nil {
     log.Fatal(err)
   }
-  fmt.Println(createPerson1)
+  fmt.Println(createdPerson1)
 
-  createPerson2, err := personsRepository.Create(mockperson2)
+  createdPerson2, err := personsRepository.Create(mockperson2)
   if err != nil {
     log.Fatal(err)
   }
-  fmt.Println(createPerson2)
+  fmt.Println(createdPerson2)
 
-  // GET ALL
+  fmt.Println("CREATE SUCCESSFUL")
+
+
+  // RETURN ALL
   getAllPersons, err := personsRepository.All()
   if err != nil {
     log.Fatal(err)
   }
   fmt.Println(getAllPersons)
+
+  // RETURN ONE
+  getOnePerson, err := personsRepository.GetByFamilyName("Dvorak")
+  if err != nil {
+    log.Fatal(err)
+  }
+  fmt.Println(getOnePerson)
+
+  fmt.Println("RETURN SUCCESSFUL")
+
+  // UPDATE
+  createdPerson1.Affiliation = "Pirati"
+  if _, err := personsRepository.Update(createdPerson1.Id, *createdPerson1); err != nil {
+    log.Fatal(err)
+  }
+  fmt.Println(personsRepository.All())
+  fmt.Println("UPDATE SUCCESSFUL")
+
+  // DELETE
+  if err := personsRepository.Delete(createdPerson1.Id); err != nil {
+    log.Fatal(err)
+  }
+  fmt.Println(personsRepository.All())
+  
+  if err := personsRepository.Delete(createdPerson2.Id); err != nil {
+    log.Fatal(err)
+  }
+  fmt.Println(personsRepository.All())
+  fmt.Println("DELETE SUCCESSFUL")
 
 }
 
