@@ -1,11 +1,11 @@
 package main
 
 import (
-        "database/sql"
-	"crud_go/repository"
-	"fmt"
-	"log"
-	"os"
+  "database/sql"
+  "crud_go/repository"
+  "fmt"
+  "log"
+  "os"
 )
 
 
@@ -13,58 +13,58 @@ const fileName = "persons.db"
 
 func main(){
 
-    os.Remove(fileName)
-  
-    db, err := sql.Open("sqlite3", fileName)
-    if err != nil {
-      log.Fatal(err)
-    }
+  os.Remove(fileName)
 
-    personsRepository := repository.NewSQLiteRepository(db)
+  db, err := sql.Open("sqlite3", fileName)
+  if err != nil {
+    log.Fatal(err)
+  }
 
-    if err := personsRepository.Migrate(); err != nil {
-      log.Fatal(err)
-    }
+  personsRepository := repository.NewSQLiteRepository(db)
 
-    mockperson1 := repository.Person{
-      Id: 0,
-      GivenName: "Jan",
-      FamilyName: "Novak",
-      Affiliation: "BEZPP",
-      Gender: 1,
-      Foreigner: 0,
-      Labels: "soustruznik",
-    }
+  if err := personsRepository.Migrate(); err != nil {
+    log.Fatal(err)
+  }
 
-    mockperson2 := repository.Person{
-      Id: 0,
-      GivenName: "Pepa",
-      FamilyName: "Dvorak",
-      Affiliation: "BEZPP",
-      Gender: 1,
-      Foreigner: 0,
-      Labels: "fylosof",
-    }
+  mockperson1 := repository.Person{
+    Id: 0,
+    GivenName: "Jan",
+    FamilyName: "Novak",
+    Affiliation: "BEZPP",
+    Gender: 1,
+    Foreigner: 0,
+    Labels: "soustruznik",
+  }
 
-    // CREATE
-    createPerson1, err := personsRepository.Create(mockperson1)
-    if err != nil {
-      log.Fatal(err)
-    }
-    fmt.Println(createPerson1)
+  mockperson2 := repository.Person{
+    Id: 1,
+    GivenName: "Pepa",
+    FamilyName: "Dvorak",
+    Affiliation: "BEZPP",
+    Gender: 1,
+    Foreigner: 0,
+    Labels: "fyzik",
+  }
 
-    createPerson2, err := personsRepository.Create(mockperson2)
-    if err != nil {
-      log.Fatal(err)
-    }
-    fmt.Println(createPerson2)
+  // CREATE
+  createPerson1, err := personsRepository.Create(mockperson1)
+  if err != nil {
+    log.Fatal(err)
+  }
+  fmt.Println(createPerson1)
 
-    // GET ALL
-    getAllPersons, err := personsRepository.All()
-    if err != nil {
-      log.Fatal(err)
-    }
-    fmt.Println(getAllPersons)
+  createPerson2, err := personsRepository.Create(mockperson2)
+  if err != nil {
+    log.Fatal(err)
+  }
+  fmt.Println(createPerson2)
+
+  // GET ALL
+  getAllPersons, err := personsRepository.All()
+  if err != nil {
+    log.Fatal(err)
+  }
+  fmt.Println(getAllPersons)
 
 }
 
