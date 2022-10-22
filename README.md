@@ -7,7 +7,7 @@ working with database in go lang
 To run this program do:
 
 ```
-go mod download
+go mod tidy
 go build
 ./crud_go
 ```
