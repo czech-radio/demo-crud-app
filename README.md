@@ -1,19 +1,20 @@
-# crud_go
-working with database in go lang
+# demo-crud-app
 
+__Demo application demonstrating how to work with database in Go language.__
 
-## running
+## Installation
 
-To run this program do:
+To build and run this program do:
 
-```
+```shell
 go mod tidy
 go build
 ./crud_go
 ```
-and if everything works well, it should output:
 
-```
+If everything works well, it should output:
+
+```shell
 &{1 Jan Novak BEZPP 1 0 soustruznik}
 &{2 Pepa Dvorak BEZPP 1 0 fyzik}
 CREATE SUCCESSFUL
